@@ -1,9 +1,9 @@
 const BLOG = {
-  title: 'Rafael's Blog',
+  title: 'Rafael\'s Blog',
   author: 'Rafael Schranz',
   email: 'hi@rafaelschranz.com',
   link: 'https://blog.rafaelschranz.com',
-  description: "Rafael's Inner Circuit",
+  description: 'Rafael\'s Inner Circuit',
   lang: 'en-US', // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES']
   timezone: 'Europe/Zurich', // Your Notion posts' date will be interpreted as this timezone. See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for all options.
   appearance: 'auto', // ['light', 'dark', 'auto'],
