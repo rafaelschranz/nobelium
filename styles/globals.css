@@ -45,6 +45,14 @@
   font-named-instance: "Regular";
   src: url("/fonts/OverusedGrotesk-VF.woff2") format("woff2");
 }
+@font-face {
+  font-family: "Lexend";
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: "Regular";
+  src: url("/fonts/Lexend-Regular.woff2") format("woff2");
+}
 
 html {
   --scrollbarBG: #ffffff00;
