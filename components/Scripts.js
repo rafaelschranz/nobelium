@@ -28,13 +28,6 @@ const Scripts = () => {
           </Script>
         </>
       )}
-      {BLOG.analytics && BLOG.analytics.provider === "umami" && (
-        <script
-          defer
-          src="https://analytics.rafaelschranz.com/script.js"
-          data-website-id="b34463b9-5f13-4a1f-9be1-271b8dbdd97d"
-        ></script>
-      )}
     </>
   );
 };
