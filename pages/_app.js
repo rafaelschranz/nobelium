@@ -1,19 +1,10 @@
-import "prismjs/themes/prism.css";
-import "react-notion-x/src/styles.css";
-import "katex/dist/katex.min.css";
-import "@/styles/globals.css";
-import "@/styles/notion.css";
-
-import App from "next/app";
-import dynamic from "next/dynamic";
-import loadLocale from "@/assets/i18n";
+import "@/styles/globals.css"; // Your global styles
+import "@/styles/notion.css"; // Additional styles (if needed)
+import Head from "next/head";
 import { ConfigProvider } from "@/lib/config";
 import { LocaleProvider } from "@/lib/locale";
 import { prepareDayjs } from "@/lib/dayjs";
 import { ThemeProvider } from "@/lib/theme";
-
-const Ackee = dynamic(() => import("@/components/Ackee"), { ssr: false });
-const Gtag = dynamic(() => import("@/components/Gtag"), { ssr: false });
 
 export default function MyApp({ Component, pageProps, config, locale }) {
   return (
@@ -21,28 +12,16 @@ export default function MyApp({ Component, pageProps, config, locale }) {
       <LocaleProvider value={locale}>
         <ThemeProvider>
           <>
-            {/* Umami Tracking Script */}
-            {process.env.VERCEL_ENV === "production" &&
-              config?.analytics?.provider === "umami" && (
+            {/* Add Umami analytics script globally */}
+            <Head>
+              {process.env.NODE_ENV === "production" && (
                 <script
                   defer
                   src="https://analytics.rafaelschranz.com/script.js"
-                  data-website-id={config.analytics.umamiConfig.domainId}
+                  data-website-id="b34463b9-5f13-4a1f-9be1-271b8dbdd97d"
                 ></script>
               )}
-
-            {/* Ackee Analytics */}
-            {process.env.VERCEL_ENV === "production" &&
-              config?.analytics?.provider === "ackee" && (
-                <Ackee
-                  ackeeServerUrl={config.analytics.ackeeConfig.dataAckeeServer}
-                  ackeeDomainId={config.analytics.ackeeConfig.domainId}
-                />
-              )}
-
-            {/* Google Analytics */}
-            {process.env.VERCEL_ENV === "production" &&
-              config?.analytics?.provider === "ga" && <Gtag />}
+            </Head>
 
             <Component {...pageProps} />
           </>
