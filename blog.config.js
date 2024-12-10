@@ -35,9 +35,6 @@ const BLOG = {
     gaConfig: {
       measurementId: "", // e.g: G-XXXXXXXXXX
     },
-    umamiConfig: {
-      domainId: "b34463b9-5f13-4a1f-9be1-271b8dbdd97d", // e.g: G-XXXXXXXXXX
-    },
   },
   comment: {
     // support provider: gitalk, utterances, cusdis

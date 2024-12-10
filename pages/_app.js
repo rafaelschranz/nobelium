@@ -1,28 +1,36 @@
-import "@/styles/globals.css"; // Your global styles
-import "@/styles/notion.css"; // Additional styles (if needed)
-import Head from "next/head";
+import "prismjs/themes/prism.css";
+import "react-notion-x/src/styles.css";
+import "katex/dist/katex.min.css";
+import App from "next/app";
+import "@/styles/globals.css";
+import "@/styles/notion.css";
+import dynamic from "next/dynamic";
+import loadLocale from "@/assets/i18n";
 import { ConfigProvider } from "@/lib/config";
 import { LocaleProvider } from "@/lib/locale";
 import { prepareDayjs } from "@/lib/dayjs";
 import { ThemeProvider } from "@/lib/theme";
+import Scripts from "@/components/Scripts";
+
+const Ackee = dynamic(() => import("@/components/Ackee"), { ssr: false });
+const Gtag = dynamic(() => import("@/components/Gtag"), { ssr: false });
 
 export default function MyApp({ Component, pageProps, config, locale }) {
   return (
     <ConfigProvider value={config}>
+      <Scripts />
       <LocaleProvider value={locale}>
         <ThemeProvider>
           <>
-            {/* Add Umami analytics script globally */}
-            <Head>
-              {process.env.NODE_ENV === "production" && (
-                <script
-                  defer
-                  src="https://analytics.rafaelschranz.com/script.js"
-                  data-website-id="b34463b9-5f13-4a1f-9be1-271b8dbdd97d"
-                ></script>
+            {process.env.VERCEL_ENV === "production" &&
+              config?.analytics?.provider === "ackee" && (
+                <Ackee
+                  ackeeServerUrl={config.analytics.ackeeConfig.dataAckeeServer}
+                  ackeeDomainId={config.analytics.ackeeConfig.domainId}
+                />
               )}
-            </Head>
-
+            {process.env.VERCEL_ENV === "production" &&
+              config?.analytics?.provider === "ga" && <Gtag />}
             <Component {...pageProps} />
           </>
         </ThemeProvider>
