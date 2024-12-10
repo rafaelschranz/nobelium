@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['gravatar.com']
+    domains: ["gravatar.com"],
   },
   eslint: {
     // dirs: ['components', 'layouts', 'lib', 'pages']
@@ -8,17 +8,25 @@ module.exports = {
   async headers() {
     return [
       {
-        source: '/:path*{/}?',
+        source: "/:path*{/}?",
         headers: [
           {
-            key: 'Permissions-Policy',
-            value: 'interest-cohort=()'
-          }
-        ]
-      }
-    ]
+            key: "Content-Security-Policy",
+            value: `default-src 'self'; script-src 'self' https://analytics.rafaelschranz.com; connect-src 'self' https://analytics.rafaelschranz.com; img-src 'self'; style-src 'self';`,
+          },
+          {
+            key: "Permissions-Policy",
+            value: "interest-cohort=()",
+          },
+        ],
+      },
+    ];
   },
-  transpilePackages: ['dayjs']
+  transpilePackages: ["dayjs"],
+  env: {
+    NODE_ENV: process.env.NODE_ENV, // Ensure NODE_ENV is available
+  },
+  // Uncomment below section if using Preact (optional)
   // webpack: (config, { dev, isServer }) => {
   //   // Replace React with Preact only in client production build
   //   if (!dev && !isServer) {
@@ -30,4 +38,4 @@ module.exports = {
   //   }
   //   return config
   // }
-}
+};
